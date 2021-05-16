@@ -1,0 +1,9 @@
+= Auto-scan to automatically scan documents from HP, OCR files, optimize it and finally send it by email as attachment
+:icons: font
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
