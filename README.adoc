@@ -9,9 +9,21 @@ ifdef::env-github[]
 endif::[]
 
 == Description
-Auto-scan is a tool to automatically scan documents from HP, OCR files, optimize it and finally send it by email as attachment
+Auto-scan is a tool to automatically scan documents from HP, OCR files, optimize it and finally send it by email as attachment.
 
-== Prerequistes
+## Architectures
+
+Based on python3.6 slim buster it supports
+
+* [x] `linux/386`
+* [x] `linux/amd64`
+* [x] `linux/arm/v5`
+* [x] `linux/arm/v7`
+* [x] `linux/arm64/v8`
+* [x] `linux/ppc64le`
+* [x] `linux/s390x`
+
+== Prerequisites
 In order to correctly work properly this script needs access to DBus. Actual shortcut is to run it as privileged Docker container and map host socket to gain access to DBus (see launch script below).
 
 == How to start
@@ -22,6 +34,7 @@ git clone https://github.com/matbgn/auto-scan.git
 
 Git Shallow Clone the scan-pdf repo adapted for HP scanners:
 ```bash
+cd auto-scan
 git clone --depth=1 https://github.com/matbgn/scan-pdf.git
 ```
 
