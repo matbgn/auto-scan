@@ -1,4 +1,4 @@
-= Auto-scan to automatically scan documents from HP, OCR files, optimize it and finally send it by email as attachment
+= Auto-scan docs and send them
 :icons: font
 ifdef::env-github[]
 :tip-caption: :bulb:
@@ -7,3 +7,35 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+
+== Description
+Auto-scan is a tool to automatically scan documents from HP, OCR files, optimize it and finally send it by email as attachment
+
+== Prerequistes
+In order to correctly work properly this script needs access to DBus. Actual shortcut is to run it as privileged Docker container and map host socket to gain access to DBus (see launch script below).
+
+== How to start
+Git clone actual repo:
+```bash
+git clone https://github.com/matbgn/auto-scan.git
+```
+
+Git Shallow Clone the scan-pdf repo adapted for HP scanners:
+```bash
+git clone --depth=1 https://github.com/matbgn/scan-pdf.git
+```
+
+Build docker image locally:
+```dockerfile
+docker build -t matbgn/auto_scan .
+```
+
+Run script:
+```dockerfile
+docker run -it --rm --network host -privileged \
+    -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
+    -e RPI_EMAIL=your_email@gamil.com \
+    -e RPI_PASS=your_gmail_app_secret \
+    -e EMAIL_RECIPIENTS=email1@gamil.com;email2@gamil.com \
+    matbgn/auto_scan
+```
