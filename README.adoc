@@ -13,7 +13,7 @@ Auto-scan is a tool to automatically scan documents from HP, OCR files, optimize
 
 ## Architectures
 
-Based on python3.6 slim buster it supports
+Based on python 3.6 slim buster it supports
 
 * [x] `linux/386`
 * [x] `linux/amd64`
@@ -26,7 +26,7 @@ Based on python3.6 slim buster it supports
 == Prerequisites
 In order to correctly work properly this script needs access to DBus. Actual shortcut is to run it as privileged Docker container and map host socket to gain access to DBus (see launch script below).
 
-== How to start
+== How to getting started
 Git clone actual repo:
 ```bash
 git clone https://github.com/matbgn/auto-scan.git
@@ -43,6 +43,15 @@ Build docker image locally:
 docker build -t matbgn/auto_scan .
 ```
 
+
+== Usage
+
+Scanning mode supported:
+```
+# ADF|Duplex|Flatbed
+SCAN_MODE=ADF
+```
+
 Run script:
 ```dockerfile
 sudo docker run -it --rm --net=host -privileged \
@@ -50,5 +59,6 @@ sudo docker run -it --rm --net=host -privileged \
     -e RPI_EMAIL=your_email@gmail.com \
     -e RPI_PASS=your_gmail_app_secret \
     -e EMAIL_RECIPIENTS=email1@gmail.com;email2@gmail.com \
+    -e SCAN_MODE=ADF
     matbgn/auto_scan
 ```
