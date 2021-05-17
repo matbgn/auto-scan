@@ -45,10 +45,10 @@ docker build -t matbgn/auto_scan .
 
 Run script:
 ```dockerfile
-docker run -it --rm --network host -privileged \
+sudo docker run -it --rm --net=host -privileged \
     -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
-    -e RPI_EMAIL=your_email@gamil.com \
+    -e RPI_EMAIL=your_email@gmail.com \
     -e RPI_PASS=your_gmail_app_secret \
-    -e EMAIL_RECIPIENTS=email1@gamil.com;email2@gamil.com \
+    -e EMAIL_RECIPIENTS=email1@gmail.com;email2@gmail.com \
     matbgn/auto_scan
 ```
