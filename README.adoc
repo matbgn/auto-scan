@@ -54,11 +54,34 @@ SCAN_MODE=ADF
 
 Run script:
 ```dockerfile
-sudo docker run -it --rm --net=host -privileged \
-    -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
-    -e RPI_EMAIL=your_email@gmail.com \
-    -e RPI_PASS=your_gmail_app_secret \
-    -e EMAIL_RECIPIENTS=email1@gmail.com;email2@gmail.com \
-    -e SCAN_MODE=ADF
-    matbgn/auto_scan
+sudo docker run -it --rm --net=host --privileged \
+-v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
+-e RPI_EMAIL=your_email@gmail.com \
+-e RPI_PASS=your_gmail_app_secret \
+-e EMAIL_RECIPIENTS="email1@gmail.com;email2@gmail.com" \
+-e SCAN_MODE=ADF \
+matbgn/auto_scan
 ```
+
+== Development mode
+
+Be sure to have those packages installed:
+
+    sudo apt-get install -y sane-utils libsane-hpaio \
+    imagemagick ocrmypdf \
+    tesseract-ocr-fra tesseract-ocr-deu
+
+Put your var in a .env file with above possibilities:
+
+    RPI_EMAIL=your_email@gmail.com
+    RPI_PASS=your_gmail_app_secret
+    EMAIL_RECIPIENTS=email1@gmail.com;email2@gmail.com
+    SCAN_MODE=ADF
+
+(Run venv &) Install requirements with:
+
+    pip install -r requirements.txt
+
+Then run script directly with:
+
+    python ./main.py
