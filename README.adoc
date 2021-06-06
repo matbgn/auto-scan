@@ -60,6 +60,7 @@ sudo docker run -it --rm --net=host --privileged \
 -e RPI_PASS=your_gmail_app_secret \
 -e EMAIL_RECIPIENTS="email1@gmail.com;email2@gmail.com" \
 -e SCAN_MODE=ADF \
+-e SUBJECT="Test scan" \
 matbgn/auto_scan
 ```
 
@@ -75,8 +76,9 @@ Put your var in a .env file with above possibilities:
 
     RPI_EMAIL=your_email@gmail.com
     RPI_PASS=your_gmail_app_secret
-    EMAIL_RECIPIENTS=email1@gmail.com;email2@gmail.com
+    EMAIL_RECIPIENTS=""email1@gmail.com;email2@gmail.com"
     SCAN_MODE=ADF
+    SUBJECT="Test scan"
 
 (Run venv &) Install requirements with:
 

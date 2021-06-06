@@ -14,11 +14,13 @@ def send_email(filename: str, ts: str) -> str:
 
     sent_from = gmail_user
 
+    message_subject = os.environ['SUBJECT']
+
     message = MIMEMultipart('mixed')
     message['From'] = 'RPI Scanner <{sender}>'.format(sender = sent_from)
     message['To'] = os.environ['EMAIL_RECIPIENTS']
     message['CC'] = ''
-    message['Subject'] = 'Scan ' + ts
+    message['Subject'] = 'Scan ' + message_subject + ts
 
     msg_content = '<h4>Hi There,<br> This is an automatic HP scanner message.</h4>\n'
     body = MIMEText(msg_content, 'html')
