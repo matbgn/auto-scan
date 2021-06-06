@@ -20,7 +20,7 @@ def send_email(filename: str, ts: str) -> str:
     message['From'] = 'RPI Scanner <{sender}>'.format(sender = sent_from)
     message['To'] = os.environ['EMAIL_RECIPIENTS']
     message['CC'] = ''
-    message['Subject'] = 'Scan ' + message_subject + ts
+    message['Subject'] = 'Scan ' + message_subject + " " + ts
 
     msg_content = '<h4>Hi There,<br> This is an automatic HP scanner message.</h4>\n'
     body = MIMEText(msg_content, 'html')
