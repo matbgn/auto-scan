@@ -52,6 +52,12 @@ Scanning mode supported:
 SCAN_MODE=ADF
 ```
 
+Run multiple batches and merge them in one single PDF:
+```
+# This argument is optionnal
+BATCH_TOTAL=2
+```
+
 Run script:
 ```dockerfile
 sudo docker run -it --rm --net=host --privileged \
@@ -61,6 +67,7 @@ sudo docker run -it --rm --net=host --privileged \
 -e EMAIL_RECIPIENTS="email1@gmail.com;email2@gmail.com" \
 -e SCAN_MODE=ADF \
 -e SUBJECT="Test scan" \
+-e BATCH_TOTAL=2 \
 matbgn/auto_scan
 ```
 
@@ -79,6 +86,7 @@ Put your var in a .env file with above possibilities:
     EMAIL_RECIPIENTS=""email1@gmail.com;email2@gmail.com"
     SCAN_MODE=ADF
     SUBJECT="Test scan"
+    BATCH_TOTAL=2
 
 (Run venv &) Install requirements with:
 
