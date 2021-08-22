@@ -95,3 +95,17 @@ Put your var in a .env file with above possibilities:
 Then run script directly with:
 
     python ./main.py
+
+=== In case of error
+
+In case of following error do as below:
+
+[WARNING]
+=====================
+*Error during converting jpg to pdf*
+convert-im6.q16: attempt to perform an operation not allowed by the security policy `PDF' @ error/constitute.c/IsCoderAuthorized/408.
+=====================
+
+As a temporary fix, edit /etc/ImageMagick-6/policy.xml and change the PDF rights down in the document from _none_ to _read|write_ there.
+
+Not sure about the implications, but at least it allows to get things done.
