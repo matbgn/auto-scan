@@ -107,5 +107,10 @@ convert-im6.q16: attempt to perform an operation not allowed by the security pol
 =====================
 
 As a temporary fix, edit /etc/ImageMagick-6/policy.xml and change the PDF rights down in the document from _none_ to _read|write_ there.
+Or simply run:
+```
+sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' /etc/ImageMagick-6/policy.xml
+```
+
 
 Not sure about the implications, but at least it allows to get things done.
