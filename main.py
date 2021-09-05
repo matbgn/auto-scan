@@ -17,7 +17,7 @@ except KeyError:
     batch_total = 1
 
 try:
-    paper_format = int(os.environ['PAPER_FORMAT'])
+    paper_format = os.environ['PAPER_FORMAT']
 except KeyError:
     paper_format = 'A4'
 
