@@ -58,6 +58,12 @@ Run multiple batches and merge them in one single PDF:
 BATCH_TOTAL=2
 ```
 
+Change paper format scanning (A3, A4, A5 supported):
+```
+# This argument is optionnal (A4 will be selected as default)
+PAPER_FORMAT="A3"
+```
+
 Run script:
 ```dockerfile
 sudo docker run -it --rm --net=host --privileged \
@@ -68,6 +74,7 @@ sudo docker run -it --rm --net=host --privileged \
 -e SCAN_MODE=ADF \
 -e SUBJECT="Test scan" \
 -e BATCH_TOTAL=2 \
+-e PAPER_FORMAT="A4" \
 matbgn/auto_scan
 ```
 
@@ -87,6 +94,7 @@ Put your var in a .env file with above possibilities:
     SCAN_MODE=ADF
     SUBJECT="Test scan"
     BATCH_TOTAL=2
+    PAPER_FORMAT="A3"
 
 (Run venv &) Install requirements with:
 
