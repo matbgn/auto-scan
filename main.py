@@ -5,6 +5,8 @@ import datetime
 from send_email import send_email
 import os
 from dotenv import load_dotenv
+from PIL import Image, ImageFile
+import fnmatch
 
 load_dotenv()
 
@@ -29,9 +31,16 @@ while batch_total > 0:
 
     if os.environ['SCAN_MODE'] == 'ADF':
         print('ADF scanning mode')
-        subprocess.run(["scan-pdf/src/scan-pdf", "--color-mode", "color", "--paper-format", paper_format, source_file])
-        # subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100", "--source=ADF", "--resolution", "300", "--mode", "Color", "--format=pnm"])
-        # subprocess.run(["convert", "-depth", "4", "-density", "300", "-compress", "zip", "out*.pnm", file_with_ts])
+        subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100", "--source=ADF", "--resolution", "300", "--mode", "Color", "--format=pnm"])
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
+        for i in range(len(fnmatch.filter(os.listdir(), '*.pnm'))):
+            tmpImg = Image.open(f"out{i+1}.pnm")
+            tmpImg = tmpImg.crop((0, 0, 2550, 3500))
+            # img = img.convert('RGB')
+            tmpImg.save(f"out{i+1}.pdf")
+
+        subprocess.run(f'pdfunite out*.pdf {source_file}', shell=True)
+        subprocess.run(f'rm -rf *.pnm', shell=True)
     elif os.environ['SCAN_MODE'] == 'Duplex':
         print('Duplex scanning mode')
         subprocess.run(["scan-pdf/src/scan-pdf", "--duplex", "--color-mode", "color", "--paper-format", paper_format, source_file])
