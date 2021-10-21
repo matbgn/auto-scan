@@ -43,7 +43,7 @@ Build docker image locally:
 docker build -t matbgn/auto_scan .
 ```
 
-== Build for other platforms
+=== Build for other platforms
 _source: https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408_
 
 . Make sure you have a sufficient kernel on your Linux machine >= 4.8
@@ -88,9 +88,7 @@ WARNING: If it only reports support for linux/amd64 and linux/386 you either sti
 [start=6]
 . Finally build it locally in a tar to be loaded later on the target machine
 
-    docker buildx build -t matbgn/auto_scan --platform linux/arm64 -o - - > auto_scan_arm64.tar
-
-NOTE: It will take some time (~10min) so be patient ;-)
+    docker buildx build -t matbgn/auto_scan --platform linux/arm64 -o type=docker,dest=- . > auto_scan_arm64.tar
 
 .. To load an image on the target machine, simply run
 
