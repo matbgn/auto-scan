@@ -42,15 +42,18 @@ while batch_total > 0:
 
     if os.environ['SCAN_MODE'] == 'ADF':
         print('ADF scanning mode')
-        subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100", "--source=ADF", "--resolution", "300", "--mode", "Color", "--format=pnm"])
+        subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100",
+                        "--source=ADF", "--resolution", "300", "--mode", "Color", "--format=pnm"])
         process_raw_images()
     elif os.environ['SCAN_MODE'] == 'Duplex':
         print('Duplex scanning mode')
-        subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100", "--source=Duplex", "--resolution", "300", "--mode", "Color", "--format=pnm"])
+        subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100",
+                        "--source=Duplex", "--resolution", "300", "--mode", "Color", "--format=pnm"])
         process_raw_images()
     else:
         print('Flatbed scanning mode')
-        subprocess.run(["scan-pdf/src/scan-pdf", "--flatbed", "--color-mode", "color", "--paper-format", paper_format, source_file])
+        subprocess.run(["scan-pdf/src/scan-pdf", "--flatbed", "--color-mode", "color",
+                        "--paper-format", paper_format, source_file])
 
     subprocess.run(["ocrmypdf", "-r", "--rotate-pages-threshold", "6", "-O", "3", source_file, source_file])
 
