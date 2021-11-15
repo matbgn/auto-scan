@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 def send_email(subject: str, emails: str, filename: str, ts: str) -> str:
     load_dotenv()
 
-    gmail_user = os.environ['RPI_EMAIL']
-    gmail_password = os.environ['RPI_PASS']
+    gmail_user = os.environ['SMTPSERVER_EMAIL']
+    gmail_password = os.environ['SMTPSERVER_PASS']
 
     sent_from = gmail_user
 

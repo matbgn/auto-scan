@@ -121,8 +121,8 @@ Run script:
 ```dockerfile
 sudo docker run -it --rm --net=host --privileged \
 -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
--e RPI_EMAIL=your_email@gmail.com \
--e RPI_PASS=your_gmail_app_secret \
+-e SMTPSERVER_EMAIL=your_email@gmail.com \
+-e SMTPSERVER_PASS=your_gmail_app_secret \
 -e EMAIL_RECIPIENTS="email1@gmail.com;email2@gmail.com" \
 -e SCAN_MODE=ADF \
 -e SUBJECT="Test scan" \
@@ -145,8 +145,8 @@ matbgn/auto_scan
 
 . Put your variables in a .env file with below possibilities:
 
-    RPI_EMAIL=your_email@gmail.com
-    RPI_PASS=your_gmail_app_secret
+    SMTPSERVER_EMAIL=your_email@gmail.com
+    SMTPSERVER_PASS=your_gmail_app_secret
     EMAIL_RECIPIENTS=""email1@gmail.com;email2@gmail.com"
     SCAN_MODE=ADF
     SUBJECT="Test scan"
