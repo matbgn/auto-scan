@@ -182,4 +182,26 @@ Follow the first two points of the above development mode on your server (or jus
 
 Then simply run (on any port wanted):
 
-    waitress-serve --port=4040 app:app
+    waitress-serve --port=4040 app:app &
+
+As a service:
+
+_See https://www.devdungeon.com/content/creating-systemd-service-files_
+
+
+```
+# /etc/systemd/system/auto_scan.service
+[Unit]
+Description=Auto scan server
+After=network.target
+
+[Service]
+Type=simple
+User=USER_TO_BE_USED
+WorkingDirectory=/home/USER_TO_BE_USED/auto-scan
+ExecStart=/path/to/venv/bin/waitress-serve --port=4040 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```

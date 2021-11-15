@@ -19,7 +19,7 @@ def auto_scan():
     # making sure its not empty
     if request.form['subject'] != '':
         main(request.form['email_recipients'], request.form['subject'], request.form['scan_mode'],
-             request.form['paper_format'], int(request.form['batch_total']))
+             request.form['paper_format'], int(request.form['batch_total']), as_web_interface=True)
 
     return render_template('index.html',
                            PageTitle="Landing page")

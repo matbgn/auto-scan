@@ -2,6 +2,8 @@
 
 import subprocess
 import datetime
+import time
+
 from send_email import send_email
 import os
 from dotenv import load_dotenv
@@ -46,7 +48,8 @@ def process_raw_images(_source_file):
     subprocess.run(f'rm -rf *.pnm', shell=True)
 
 
-def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=paper_format, _batch_total=batch_total):
+def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=paper_format, _batch_total=batch_total,
+         as_web_interface=False):
     ts_now = '{:%Y-%m-%d_%H%M%S}'.format(datetime.datetime.now())
     file_with_ts = 'attachment_' + ts_now + '.pdf'
 
@@ -73,7 +76,13 @@ def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=p
 
         subprocess.run(["ocrmypdf", "-r", "--rotate-pages-threshold", "6", "-O", "3", source_file, source_file])
 
-        input("Press Enter to continue...") if _batch_total > 1 else None
+        if _batch_total > 1:
+            msg = "Press Enter to continue..."
+            print(msg)
+            time.sleep(5) if as_web_interface else input()
+
+        else:
+            pass
 
         _batch_total = _batch_total - 1
 
