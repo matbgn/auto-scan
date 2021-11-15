@@ -24,9 +24,9 @@ Based on python 3.6 slim buster it supports
 * [x] `linux/s390x`
 
 == Prerequisites
-In order to correctly work properly this script needs access to DBus. Actual shortcut is to run it as privileged Docker container and map host socket to gain access to DBus (see launch script below).
+In order to work properly the container provided here needs access to DBus. Actual shortcut is to run it as privileged Docker container and map host socket to gain access to DBus (see launch script below).
 
-== How to getting started
+== How to get started
 Git clone actual repo:
 ```bash
 git clone https://github.com/matbgn/auto-scan.git
@@ -38,7 +38,7 @@ cd auto-scan
 git clone --depth=1 https://github.com/matbgn/scan-pdf.git
 ```
 
-Build docker image locally:
+Build docker image locally or run it in dev mode (see below):
 ```dockerfile
 docker build -t matbgn/auto_scan .
 ```
@@ -133,13 +133,17 @@ matbgn/auto_scan
 
 == Development mode
 
-Be sure to have those packages installed:
+. Be sure to have those packages installed:
 
     sudo apt-get install -y sane-utils libsane-hpaio \
     imagemagick ocrmypdf \
     tesseract-ocr-fra tesseract-ocr-deu
 
-Put your var in a .env file with above possibilities:
+. (Run venv &) Install requirements with:
+
+    pip install -r requirements.txt
+
+. Put your variables in a .env file with below possibilities:
 
     RPI_EMAIL=your_email@gmail.com
     RPI_PASS=your_gmail_app_secret
@@ -149,17 +153,13 @@ Put your var in a .env file with above possibilities:
     BATCH_TOTAL=2
     PAPER_FORMAT="A3"
 
-(Run venv &) Install requirements with:
-
-    pip install -r requirements.txt
-
-Then run script directly with:
+. Then run script directly with:
 
     python ./main.py
 
 === In case of error
 
-In case of following error do as below:
+In case of following error proceed as below:
 
 [WARNING]
 =====================
@@ -174,4 +174,12 @@ sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' /etc/I
 ```
 
 
-Not sure about the implications, but at least it allows to get things done.
+Not sure about the implications, but at least it allows getting things done.
+
+== Deploy on a server
+
+Follow the first two points of the above development mode on your server (or just locally).
+
+Then simply run (on any port wanted):
+
+    waitress-serve --port=4040 app:app

@@ -1,4 +1,4 @@
-FROM python:3.6-slim-buster
+FROM python:3.8-slim-buster
 # gcc g++ libqpdf-dev
 RUN apt-get update && apt-get install -y sane-utils libsane-hpaio imagemagick tesseract-ocr-fra tesseract-ocr-deu ocrmypdf nano
 WORKDIR /usr/src/app

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Auto-scan</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" rel="stylesheet">
+</head>
+<body>
+<div class="container py-4">
+    <form accept=".txt" action="" enctype="multipart/form-data" method="POST">
+        <div class="row my-3">
+            <h2 class="col" id="TextTitle">
+                Auto-scan launcher
+            </h2>
+        </div>
+        <div class="row py-2">
+            <div class="col-4 d-flex justify-content-end align-items-end">
+                <label class="form-label" for="email_recipients">Email recipients</label>
+            </div>
+            <div class="col">
+                <input class="form-control" id="email_recipients" name="email_recipients" type="email" required/>
+            </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-4 d-flex justify-content-end align-items-end">
+                <label class="form-label" for="subject">Subject</label>
+            </div>
+            <div class="col">
+                <input class="form-control" id="subject" name="subject" type="text" required/>
+            </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <label class="form-label">Scan mode</label>
+            </div>
+            <div class="col">
+                <input id="adf" name="scan_mode" type="radio" value="ADF" required/><label for="adf">&nbsp;ADF</label><br>
+                <input id="duplex" name="scan_mode" type="radio" value="Duplex"/><label for="duplex">&nbsp;Duplex</label><br>
+                <input id="flatbed" name="scan_mode" type="radio" value="Flatbed"/><label for="flatbed">&nbsp;Flatbed</label><br>
+            </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <label class="form-label">Paper format</label>
+            </div>
+            <div class="col">
+                <input id="a5" name="paper_format" type="radio" value="A5" required/><label for="a5">&nbsp;A5</label><br>
+                <input id="a4" name="paper_format" type="radio" value="A4"/><label for="a4">&nbsp;A4</label><br>
+                <input id="a3" name="paper_format" type="radio" value="A3"/><label for="a3">&nbsp;A3</label><br>
+            </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-4 d-flex justify-content-end align-items-end">
+                <label class="form-label" for="batch_total">Batch total</label>
+            </div>
+            <div class="col">
+                <input class="form-control" id="batch_total" name="batch_total" type="number" min="1" value="1" required/>
+            </div>
+        </div>
+        <input class="btn btn-primary" name="submit_form" type="submit" value="Scan!">
+    </form>
+</div>
+<script crossorigin="anonymous"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

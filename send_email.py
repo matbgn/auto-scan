@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 
 
-def send_email(filename: str, ts: str) -> str:
+def send_email(subject: str, emails: str, filename: str, ts: str) -> str:
     load_dotenv()
 
     gmail_user = os.environ['RPI_EMAIL']
@@ -14,11 +14,11 @@ def send_email(filename: str, ts: str) -> str:
 
     sent_from = gmail_user
 
-    message_subject = os.environ['SUBJECT']
+    message_subject = subject
 
     message = MIMEMultipart('mixed')
-    message['From'] = 'RPI Scanner <{sender}>'.format(sender = sent_from)
-    message['To'] = os.environ['EMAIL_RECIPIENTS']
+    message['From'] = 'RPI Scanner <{sender}>'.format(sender=sent_from)
+    message['To'] = emails
     message['CC'] = ''
     message['Subject'] = 'Scan ' + message_subject + " " + ts
 
@@ -30,7 +30,7 @@ def send_email(filename: str, ts: str) -> str:
 
     try:
         with open(attachmentPath, "rb") as attachment:
-            p = MIMEApplication(attachment.read(),_subtype="pdf")
+            p = MIMEApplication(attachment.read(), _subtype="pdf")
             p.add_header('Content-Disposition', "attachment; filename= %s" % attachmentPath.split("/")[-1])
             message.attach(p)
     except Exception as e:
@@ -39,13 +39,13 @@ def send_email(filename: str, ts: str) -> str:
     msg_full = message.as_string()
 
     try:
-       server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-       server.ehlo()
-       server.login(gmail_user, gmail_password)
-       server.sendmail(sent_from,
-                       message['To'].split(";") + (message['CC'].split(";") if message['CC'] else []),
-                       msg_full)
-       server.close()
-       print('Email sent!')
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.ehlo()
+        server.login(gmail_user, gmail_password)
+        server.sendmail(sent_from,
+                        message['To'].split(";") + (message['CC'].split(";") if message['CC'] else []),
+                        msg_full)
+        server.close()
+        print('Email sent!')
     except:
-       print('Something went wrong...')
+        print('Something went wrong...')
