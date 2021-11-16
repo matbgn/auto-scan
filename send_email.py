@@ -17,7 +17,7 @@ def send_email(subject: str, emails: str, filename: str, ts: str) -> str:
     message_subject = subject
 
     message = MIMEMultipart('mixed')
-    message['From'] = 'RPI Scanner <{sender}>'.format(sender=sent_from)
+    message['From'] = 'BGN Scanner <{sender}>'.format(sender=sent_from)
     message['To'] = emails
     message['CC'] = ''
     message['Subject'] = 'Scan ' + message_subject + " " + ts
