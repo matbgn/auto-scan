@@ -147,6 +147,7 @@ matbgn/auto_scan
 
     SMTPSERVER_EMAIL=your_email@gmail.com
     SMTPSERVER_PASS=your_gmail_app_secret
+    SMTPSERVER_HOST=smtp.gmail.com
     EMAIL_RECIPIENTS=""email1@gmail.com;email2@gmail.com"
     SCAN_MODE=ADF
     SUBJECT="Test scan"

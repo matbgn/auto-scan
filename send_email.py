@@ -9,10 +9,11 @@ from dotenv import load_dotenv
 def send_email(subject: str, emails: str, filename: str, ts: str) -> str:
     load_dotenv()
 
-    gmail_user = os.environ['SMTPSERVER_EMAIL']
-    gmail_password = os.environ['SMTPSERVER_PASS']
+    smtp_user = os.environ['SMTPSERVER_EMAIL']
+    smtp_password = os.environ['SMTPSERVER_PASS']
+    smtp_host = os.environ['SMTPSERVER_HOST']
 
-    sent_from = gmail_user
+    sent_from = smtp_user
 
     message_subject = subject
 
@@ -39,9 +40,9 @@ def send_email(subject: str, emails: str, filename: str, ts: str) -> str:
     msg_full = message.as_string()
 
     try:
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server = smtplib.SMTP_SSL(smtp_host, 465)
         server.ehlo()
-        server.login(gmail_user, gmail_password)
+        server.login(smtp_user, smtp_password)
         server.sendmail(sent_from,
                         message['To'].split(";") + (message['CC'].split(";") if message['CC'] else []),
                         msg_full)
