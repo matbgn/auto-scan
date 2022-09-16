@@ -49,7 +49,7 @@ def process_raw_images(_source_file):
 
 
 def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=paper_format, _batch_total=batch_total,
-         as_web_interface=False):
+         as_web_interface=False, is_local_scan=False):
     ts_now = '{:%Y-%m-%d_%H%M%S}'.format(datetime.datetime.now())
     file_with_ts = 'attachment_' + ts_now + '.pdf'
 
@@ -90,7 +90,11 @@ def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=p
 
     send_email(_subject, _emails, file_with_ts, ts_now)
 
-    subprocess.run(f'rm -rf *.pdf', shell=True)
+    if is_local_scan:
+        subprocess.run(f'mv {file_with_ts} /home/matbgn/paperless-bootstrap/consume/')
+        subprocess.run("echo hello")
+
+    # subprocess.run(f'rm -rf *.pdf', shell=True)
 
 
 if __name__ == '__main__':
