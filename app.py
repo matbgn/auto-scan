@@ -27,7 +27,7 @@ def auto_scan():
     multiselect = request.form.getlist('email_recipients')
     if request.form['subject'] != '':
         main(';'.join(multiselect), request.form['subject'], request.form['scan_mode'],
-             request.form['paper_format'], int(request.form['batch_total']), as_web_interface=True, bool(request.form['is_local_scan']))
+             request.form['paper_format'], int(request.form['batch_total']), as_web_interface=True, is_local_scan=bool(request.form['is_local_scan']))
 
     return render_template('index.html', mails=emails)
 

@@ -153,6 +153,7 @@ matbgn/auto_scan
     SUBJECT="Test scan"
     BATCH_TOTAL=2
     PAPER_FORMAT="A3"
+    PAPERLESS_LOCATION="~/paperless/consume"
 
 . Then run script directly with:
 

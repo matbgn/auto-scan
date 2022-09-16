@@ -37,6 +37,11 @@ try:
 except KeyError:
     batch_total = 1
 
+try:
+    paperless_location = os.environ['PAPERLESS_LOCATION']
+except KeyError:
+    paperless_location = './consume/'
+
 
 def process_raw_images(_source_file):
     ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -91,10 +96,9 @@ def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=p
     send_email(_subject, _emails, file_with_ts, ts_now)
 
     if is_local_scan:
-        subprocess.run(f'mv {file_with_ts} /home/matbgn/paperless-bootstrap/consume/')
-        subprocess.run("echo hello")
+        subprocess.run(f'mv {file_with_ts} {paperless_location}', shell=True)
 
-    # subprocess.run(f'rm -rf *.pdf', shell=True)
+    subprocess.run(f'rm -rf *.pdf', shell=True)
 
 
 if __name__ == '__main__':
