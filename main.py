@@ -58,8 +58,8 @@ def process_raw_images(_source_file):
     subprocess.run(f'rm -rf *.pnm', shell=True)
 
 
-def main(_emails=emails, _subject=subject, _printer_address=printer_address, _scan_mode=scan_mode, _paper_format=paper_format, _batch_total=batch_total,
-         as_web_interface=False, is_local_scan=False):
+def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=paper_format, _batch_total=batch_total,
+         as_web_interface=False, is_local_scan=False, _printer_address=printer_address):
     ts_now = '{:%Y-%m-%d_%H%M%S}'.format(datetime.datetime.now())
     file_with_ts = 'attachment_' + ts_now + '.pdf'
 
@@ -81,8 +81,9 @@ def main(_emails=emails, _subject=subject, _printer_address=printer_address, _sc
             process_raw_images(source_file)
         else:
             print('Flatbed scanning mode')
-            subprocess.run(["scan-pdf/src/scan-pdf", "--flatbed", "--color-mode", "color",
-                            "--paper-format", _paper_format, source_file])
+            print(_paper_format)
+            print(source_file)
+            subprocess.run(["scan-pdf/src/scan-pdf", "--flatbed", "--color-mode", "color", "--paper-format", _paper_format, source_file])
 
         subprocess.run(["ocrmypdf", "-r", "--rotate-pages-threshold", "6", "-O", "3", source_file, source_file])
 
