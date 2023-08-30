@@ -2,3 +2,4 @@
 test.pdf
 venv
 .idea
+__pycache__
