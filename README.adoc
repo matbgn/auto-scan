@@ -99,6 +99,11 @@ WARNING: If it only reports support for linux/amd64 and linux/386 you either sti
 
 == Usage
 
+Printer address in following format:
+```
+PRINTER_ADDRESS="hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.14.113"
+```
+
 Scanning mode supported:
 ```
 # ADF|Duplex|Flatbed
@@ -126,8 +131,9 @@ sudo docker run -it --rm --net=host --privileged \
 -e EMAIL_RECIPIENTS="email1@gmail.com;email2@gmail.com" \
 -e SCAN_MODE=ADF \
 -e SUBJECT="Test scan" \
--e BATCH_TOTAL=2 \
+-e BATCH_TOTAL=1 \
 -e PAPER_FORMAT="A4" \
+-e PRINTER_ADDRESS="hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.14.113" \
 matbgn/auto_scan
 ```
 
@@ -143,16 +149,23 @@ matbgn/auto_scan
 
     pip install -r requirements.txt
 
+. Grab scan_pdf depedency
+
+    cd auto-scan
+    git clone --depth=1 https://github.com/matbgn/scan-pdf.git
+    cd ..
+
 . Put your variables in a .env file with below possibilities:
 
     SMTPSERVER_EMAIL=your_email@gmail.com
     SMTPSERVER_PASS=your_gmail_app_secret
     SMTPSERVER_HOST=smtp.gmail.com
     EMAIL_RECIPIENTS=""email1@gmail.com;email2@gmail.com"
-    SCAN_MODE=ADF
+    SCAN_MODE=Flatbed
     SUBJECT="Test scan"
-    BATCH_TOTAL=2
-    PAPER_FORMAT="A3"
+    BATCH_TOTAL=1
+    PAPER_FORMAT="A4"
+    PRINTER_ADDRESS="hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.14.113"
     PAPERLESS_LOCATION="~/paperless/consume"
 
 . Then run script directly with:

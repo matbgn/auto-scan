@@ -6,9 +6,9 @@ import time
 
 from send_email import send_email
 import os
-from dotenv import load_dotenv
 from PIL import Image, ImageFile
 import fnmatch
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -38,6 +38,11 @@ except KeyError:
     batch_total = 1
 
 try:
+    printer_address = os.environ['PRINTER_ADDRESS']
+except KeyError:
+    printer_address = "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100"
+
+try:
     paperless_location = os.environ['PAPERLESS_LOCATION']
 except KeyError:
     paperless_location = './consume/'
@@ -53,7 +58,7 @@ def process_raw_images(_source_file):
     subprocess.run(f'rm -rf *.pnm', shell=True)
 
 
-def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=paper_format, _batch_total=batch_total,
+def main(_emails=emails, _subject=subject, _printer_address=printer_address, _scan_mode=scan_mode, _paper_format=paper_format, _batch_total=batch_total,
          as_web_interface=False, is_local_scan=False):
     ts_now = '{:%Y-%m-%d_%H%M%S}'.format(datetime.datetime.now())
     file_with_ts = 'attachment_' + ts_now + '.pdf'
@@ -66,12 +71,12 @@ def main(_emails=emails, _subject=subject, _scan_mode=scan_mode, _paper_format=p
 
         if _scan_mode == 'ADF':
             print('ADF scanning mode')
-            subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100",
+            subprocess.run(["scanimage", "-b", "-d", _printer_address,
                             "--source=ADF", "--resolution", "300", "--mode", "Color", "--format=pnm"])
             process_raw_images(source_file)
         elif _scan_mode == 'Duplex':
             print('Duplex scanning mode')
-            subprocess.run(["scanimage", "-b", "-d", "hpaio:/net/OfficeJet_Pro_7740_series?ip=192.168.8.100",
+            subprocess.run(["scanimage", "-b", "-d", _printer_address,
                             "--source=Duplex", "--resolution", "300", "--mode", "Color", "--format=pnm"])
             process_raw_images(source_file)
         else:
